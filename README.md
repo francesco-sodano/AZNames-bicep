@@ -59,7 +59,7 @@ appService = {
 
 ## How to use
 
-A template sample repository was created to showcase how to use this module (**https://github.com/nianton/bicep-starter**), and you will also find an example in the **`/examples`** folder, with the **`example.sub.bicep`** demonstrating how to use this module to facilitate naming resources on Azure.
+A template sample repository was created to showcase how to use this module, and you will also find an example in the **`/examples`** folder, with the **`example.sub.bicep`** demonstrating how to use this module to facilitate naming resources on Azure.
 
 ## Contributing
 
