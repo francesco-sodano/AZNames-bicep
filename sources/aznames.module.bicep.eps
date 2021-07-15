@@ -52,7 +52,7 @@ output names object = {
     uniName: substring(replace(uniqueResourceNameTemplateNoDashes, separator, '<%= $prefix %>'), 0, min(length(replace(uniqueResourceNameTemplateNoDashes, separator, '<%= $prefix %>')), <%= $maxLength %>))
     <%- } -%>
     prefix: '<%= $prefix %>'
-    maxLenght: <%= $maxLength %>
+    maxLength: <%= $maxLength %>
     scope: '<%= $_.scope %>'
     dashes: <%= $_.dashes.ToString().ToLower() %>
   }
