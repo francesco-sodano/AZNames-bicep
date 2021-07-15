@@ -1,0 +1,60 @@
+/*
+ * Azure Bicep Module:
+ * Azure Naming Convention - Azure Resoruce refName Generator
+ *
+ * Author: Francesco Sodano
+ * Github: https://github.com/francesco-sodano/bicep-azurenaming
+ * 
+ */
+
+@description('suffixes for naming - if not specified, the names will refer to an APPDEMO application in a DEV environment')
+param suffixes array = [
+  'appdemo'
+  'dev'
+]
+
+@description('Custom ending value for naming - if not specified, part of resourceGroup.Id will be used')
+param uniquifier string = resourceGroup().id
+ 
+@description('Max length of the uniqueness suffix to be added from 0 to 5 - if not specified, the lenght will be 3')
+@minValue(0)
+@maxValue(5)
+param uniquifierLength int = 3
+ 
+@description('Dashes will be used when possible')
+param useDashes bool = true
+ 
+
+var separator = useDashes ? '-' : ''
+var useUniquifier = uniquifierLength == 0
+var azureDummyResource = '????'
+var definedSuffix = toLower('${separator}${replace(replace(replace(string(suffixes), '["', ''), '"]', ''), '","', separator)}')
+var uniquifierEnd = useUniquifier ? '' : toLower('${separator}${substring(uniqueString(uniquifier), 0, uniquifierLength)}')
+
+var resourceNameTemplate = '${azureDummyResource}${definedSuffix}'
+var resourceNameTemplateNoDashes = replace(resourceNameTemplate, separator, '')
+var uniqueResourceNameTemplate = '${azureDummyResource}${definedSuffix}${uniquifierEnd}'
+var uniqueResourceNameTemplateNoDashes = replace(uniqueResourceNameTemplate, separator, '')
+
+
+
+output names object = {
+<% $definitions | ForEach-Object { 
+  $prefix = $_.prefix
+  $maxLength = $_.length.max
+-%>
+  <%= ConvertTo-CamelCase -Name $_.name %>: {
+    <%- if ($_.dashes) { -%>
+    refName: substring(replace(resourceNameTemplate, separator, '<%= $prefix %>'), 0, min(length(replace(resourceNameTemplate, separator, '<%= $prefix %>')), <%= $maxLength %>))
+    uniName: substring(replace(uniqueResourceNameTemplate, separator, '<%= $prefix %>'), 0, min(length(replace(uniqueResourceNameTemplate, separator, '<%= $prefix %>')), <%= $maxLength %>))
+    <%- } else { -%>
+    refName: substring(replace(resourceNameTemplateNoDashes, separator, '<%= $prefix %>'), 0, min(length(replace(resourceNameTemplateNoDashes, separator, '<%= $prefix %>')), <%= $maxLength %>))
+    uniName: substring(replace(uniqueResourceNameTemplateNoDashes, separator, '<%= $prefix %>'), 0, min(length(replace(uniqueResourceNameTemplateNoDashes, separator, '<%= $prefix %>')), <%= $maxLength %>))
+    <%- } -%>
+    prefix: '<%= $prefix %>'
+    maxLenght: <%= $maxLength %>
+    scope: '<%= $_.scope %>'
+    dashes: <%= $_.dashes.ToString().ToLower() %>
+  }
+<% } -%>
+}
