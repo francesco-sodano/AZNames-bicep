@@ -2,35 +2,36 @@
 [![Open in Visual Studio Code](https://open.vscode.dev/badges/open-in-vscode.svg)](https://open.vscode.dev/francesco-sodano/bicep-azurenaming) 
 
 
-# AzNaming - A Bicep module for consistent naming convention in Azure
+# AzNames - A Bicep module for a consistent naming convention in Azure
 
 ## Introduction
 
-this is a bicep module to automate resource name generation following the recommended naming convention and abbreviations for Azure resource types
-Bicep and ARM template module for keeping a consistent Azure resources naming convention, as well as respecting the rules for each resource name (max length, whether dashes are allowed etc). Inspired and based on the nice [Terraform module/implementation](https://github.com/Azure/terraform-azurerm-naming).
+This Bicep module helps to automate resource name generation following the [recommended naming convention and abbreviations](https://docs.microsoft.com/en-us/azure/cloud-adoption-framework/ready/azure-best-practices/resource-naming)  for Azure resource types.
+
+This module is made to be fully customizable and adapt to user defined naming convention (including custom resource abbreviation) and it's aim to support the user in any name generation requirements providing not only a unique name specific for the current deployment but also additional support output to be manipulated in the bicep main deployment.
+
+Inspired by [Terraform module/implementation](https://github.com/Azure/terraform-azurerm-naming), this project is a reworking of the great job done by [Nikolaos Antoniou](https://github.com/nianton/azure-naming)
 
 ## Project Structure (and automation)
 
-TBD
+*TBD - explain how the module is automatically updated*
 
-The resources are automatically generated using `go` to change the generation please change the file on the `templates` folder. To add a new resource, including its definition in the file `resourceDefinition.json`, and it will be automatically generated when `main.go` is run.
+## The AzNames Module
 
-## The AzNaming Module
+Due to the fact that the names of the resorurces has to be know at compile-time, the only way to have this is to pre-populate an object with all the possible resource names and provide it as parameter to the bicep file deploying the workload. For this reason we need to have a subscription-level deployment as entry-point.
 
-As in bicep the 'name' property of the resources to be created has to be know compile-time, the naming module cannot be directly consumed to name a resource but only as parameter to a module, we are resorting to have a subscription-level deployment azure.deploy.bicep which is passing as input parameter to the main.bicep deployment the naming part.
-
-The main deployment is handled by the main.bicep file, which dictates the resources to be created within the created resource group and is responsible to consume the naming module as input.
+for this reason, we have the `azure.deploy.bicep` (subscription-level deployment) that includes the `aznames.module.bicep` and pass the output (the object including all the names) to the `workload.bicep` that contains all the required Azure resoruces for the solution. 
 
 ### Input Parameters
 
 | Parameter name | Description | Type | Default | Required |
 | -------- | ---------- | ----------- | ----------- | ----------- |
-| **suffix** | Array of suffix parts to be included in the naming | array(string) | [appdemo,dev] | no |
-| **uniquifier** | The string be used as the seed for | string | resourceGroup().id | no |
+| **suffix** | Suffix parts to be included in the naming | array(string) | [appdemo,dev] | no |
+| **uniquifier** | The string be used as uniquifuer | string | resourceGroup().id | no |
 | **uniquifierLength** | The number of characters in the unique part | int | 3 | no |
-| **useDashes** | Whether to use dash (-) as delimiter | bool | true | no |
+| **useDashes** | Use dash (-) as delimiter | bool | true | no |
 
-**Note**: the module doesn't support prefix as this is not recommended. if you need to add a prefix, like company name or azure region, you can add that manually or just reference them as tags or in the subscription name.
+**Note**: the module doesn't support prefix as this is not recommended. if you need to add a prefix, like company name or azure region, you can add that manually or just reference them as tags or at higher level like subscription or management group.
 
 ### Output
 
@@ -56,18 +57,19 @@ appService = {
 }
 ```
 
-
 ## How to use
 
-A template sample repository was created to showcase how to use this module, and you will also find an example in the **`/examples`** folder, with the **`example.sub.bicep`** demonstrating how to use this module to facilitate naming resources on Azure.
+A Starter-Pack tool has been created to showcase how to use this module and how to create the required bicep file structure to safely deploy any workload. You will find it in the `starter-pack` folder of this repository.
+
+The starter pack will deploy *TBD - add example of resources deployed and the architecture*
 
 ## Contributing
 
 This project welcomes contributions and suggestions. Most contributions require you to agree to a Contributor License Agreement (CLA) declaring that you have the right to, and actually do, grant us the rights to use your contribution. For details, visit https://cla.opensource.microsoft.com.
 
-## References
+*TBD - prepare the guthub customer temaplte for issues to include additional resoruces*
 
-Bicep is a Domain Specific Language (DSL) for deploying Azure resources declaratively. It aims to drastically simplify the authoring experience with a cleaner syntax, improved type safety, and better support for modularity and code re-use. Bicep is a **transparent abstraction** over ARM and ARM templates, which means anything that can be done in an ARM Template can be done in Bicep (outside of temporary [known limitations](#known-limitations)). All resource `types`, `apiVersions`, and `properties` that are valid in an ARM template are equally valid in Bicep on day one (Note: even if Bicep warns that type information is not available for a resource, it can still be deployed).
+## References
 
 - [Azure Best Practices - Resource Naming](https://docs.microsoft.com/en-us/azure/cloud-adoption-framework/ready/azure-best-practices/resource-naming)
 - [Azure Best Practices - Resource Abbreviations](https://docs.microsoft.com/en-us/azure/cloud-adoption-framework/ready/azure-best-practices/resource-abbreviations)
