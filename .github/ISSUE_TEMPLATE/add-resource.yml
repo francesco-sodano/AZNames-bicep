@@ -1,5 +1,5 @@
-name: Add Resource
-description: Request to add a new resource
+name: Add a resource
+description: Request to add a new resource to the AzNames module
 title: "[ADD]: "
 labels: ["enhancement"]
 body:
@@ -8,11 +8,27 @@ body:
       value: |
         Thanks for taking the time to make AzNames even more powerful!
   - type: input
-    id: ResourceName
+    id: resourcename
     attributes:
       label: Resource Name
       description: What is the name of the resource you would like to add?
       placeholder: ex. App Service
+    validations:
+      required: true
+  - type: input
+    id: minlenght
+    attributes:
+      label: Minimum lenght
+      description: What is the minimum lenght for the resource name (number only)?
+      placeholder: 2
+    validations:
+      required: true
+  - type: input
+    id: maxlenght
+    attributes:
+      label: Maximum lenght
+      description: What is the maximum lenght for the resource name (number only)?
+      placeholder: 10
     validations:
       required: true
   - type: dropdown
@@ -27,26 +43,29 @@ body:
     validations:
       required: true
   - type: dropdown
-    id: browsers
+    id: regex
     attributes:
-      label: What browsers are you seeing the problem on?
-      multiple: true
+      label: Resource Name Rule
+      description: Resource Name Rule schema (in regex)
       options:
-        - Firefox
-        - Chrome
-        - Safari
-        - Microsoft Edge
-  - type: textarea
-    id: logs
-    attributes:
-      label: Relevant log output
-      description: Please copy and paste any relevant log output. This will be automatically formatted into code, so no need for backticks.
-      render: shell
+        - "^(?=.{MIN,MAX}$)[a-z0-9][a-zA-Z0-9-]+[a-z0-9]"
+        - "^(?=.{MIN,MAX}$)[a-z0-9]+$"
+        - Custom
+    validations:
+      required: true
   - type: checkboxes
-    id: terms
+    id: dashes
     attributes:
-      label: Code of Conduct
-      description: By submitting this issue, you agree to follow our [Code of Conduct](https://example.com)
+      label: The resource name accepts dashes
+      description: Check if the resource name accepts dashes
       options:
-        - label: I agree to follow this project's Code of Conduct
+        - label: Dashes allowed
           required: true
+  - type: input
+    id: resourceurl
+    attributes:
+      label: Microsoft docs URL
+      description: Can you share the link of the [Microsoft official documentation](https://docs.microsoft.com/en-us/azure/azure-resource-manager/management/resource-name-rules#microsoftweb)?
+      placeholder: https://docs.microsoft.com/en-us/azure/azure-resource-manager/management/resource-name-rules#microsoftweb
+    validations:
+      required: true

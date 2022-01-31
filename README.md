@@ -19,17 +19,17 @@ The base of the project is the `azure.resources.definition.json` file: this JON 
 This file is composed by multiple blocks (one for each resource) with the following structure:
 
 ```go
-    {
-      "name": "app_service",
-      "length": {
+{
+    "name": "app_service",
+    "length": {
         "min": 2,
         "max": 60
-      },
-      "regex": "^(?=.{2,60}$)[a-z0-9][a-zA-Z0-9-]+[a-z0-9]",
-      "scope": "global",
-      "prefix": "app",
-      "dashes": true
-    }
+    },
+    "regex": "^(?=.{2,60}$)[a-z0-9][a-zA-Z0-9-]+[a-z0-9]",
+    "scope": "global",
+    "prefix": "app",
+    "dashes": true
+}
 ```
 The attribute meanings are the following:
 
@@ -49,7 +49,7 @@ Most of this information can be taken from [the official Microsoft Documentation
 
 ## The AzNames Module
 
-Due to the fact that the names of the resorurces has to be know at compile-time, the only way to have this is to pre-populate an object with all the possible resource names and provide it as parameter to the bicep file deploying the workload. For this reason we need to have a subscription-level deployment as entry-point.
+Due to the fact that the names of the resorurces has to be known at compile-time, the only way to have this is to pre-populate an object with all the possible resource names and provide it as parameter to the bicep file deploying the workload. Due to this, we need to have a subscription-level deployment as entry-point.
 
 for this reason, we have the `azure.deploy.bicep` (subscription-level deployment) that includes the `aznames.module.bicep` and pass the output (the object including all the names) to the `workload.bicep` that contains all the required Azure resoruces for the solution. 
 
