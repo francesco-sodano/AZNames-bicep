@@ -40,7 +40,7 @@ for this reason, we have the `azure.deploy.bicep` (subscription-level deployment
 | **refName** | the reference name without the uniquifier - useful for loops and resourcegroup scoped resources | string |
 | **uniName** | the unique name including the uniquifier | string | 
 | **prefix** | The prefix of the resources for your own name creating | string |
-| **maxLenght** | Max number of characters for the resource | int |
+| **maxLength** | Max number of characters for the resource | int |
 | **scope** | scope level where the name must be unique| string |
 | **dashes** | if you can use dashes in the name | bool |
 
