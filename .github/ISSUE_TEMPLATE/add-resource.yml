@@ -65,7 +65,7 @@ body:
     id: resourceurl
     attributes:
       label: Microsoft docs URL
-      description: Can you share the link of the [Microsoft official documentation](https://docs.microsoft.com/en-us/azure/azure-resource-manager/management/resource-name-rules#microsoftweb)?
+      description: Can you share the link of the Microsoft official documentation?
       placeholder: https://docs.microsoft.com/en-us/azure/azure-resource-manager/management/resource-name-rules#microsoftweb
     validations:
       required: true
