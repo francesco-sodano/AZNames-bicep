@@ -67,7 +67,17 @@ The starter pack will deploy *TBD - add example of resources deployed and the ar
 
 This project welcomes contributions and suggestions. Most contributions require you to agree to a Contributor License Agreement (CLA) declaring that you have the right to, and actually do, grant us the rights to use your contribution. For details, visit https://cla.opensource.microsoft.com.
 
-*TBD - prepare the guthub customer temaplte for issues to include additional resoruces*
+*TBD - prepare the GitHub customer template for issues to include additional resources*
+
+### Building the module
+
+Install the EPS templating module:
+
+    Install-Module EPS
+
+Then run the PowerShell script: 
+
+    ./scripts/Invoke-AzNamesTemplate.ps1 > ./starter-pack/modules/aznames.module.bicep
 
 ## References
 
