@@ -14,7 +14,38 @@ Inspired by [Terraform module/implementation](https://github.com/Azure/terraform
 
 ## Project Structure (and automation)
 
-*TBD - explain how the module is automatically updated*
+The base of the project is the `azure.resources.definition.json` file: this JON file should be considered as the configuration file and contains all the rules for the name generation.
+
+This file is composed by multiple blocks (one for each resource) with the following structure:
+
+```go
+    {
+      "name": "app_service",
+      "length": {
+        "min": 2,
+        "max": 60
+      },
+      "regex": "^(?=.{2,60}$)[a-z0-9][a-zA-Z0-9-]+[a-z0-9]",
+      "scope": "global",
+      "prefix": "app",
+      "dashes": true
+    }
+```
+The attribute meanings are the following:
+
+| Attribute | Description | 
+| -------- | ---------- | 
+| **name** | Name of the resource, this will be used as name for the resource call in the module without "_" | 
+| **lenght** | The minimum and the maximum length of the resource name | 
+| **regex** | Name regex rules for the resource|
+| **scope** | Azure scope of the name unicity (could be Global, Subscription, Resource Group) |
+| **prefix** | Defined prefix assigned to the resource |
+| **dashes** | If the name accepts dash (-) in the name |
+
+Most of this information can be taken from [the official Microsoft Documentation](https://docs.microsoft.com/en-us/azure/azure-resource-manager/management/resource-name-rules#microsoftweb)
+
+
+
 
 ## The AzNames Module
 

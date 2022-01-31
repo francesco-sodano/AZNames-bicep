@@ -1096,7 +1096,7 @@
       },
       "regex": "^(?=.{1,63}$)[a-zA-Z0-9-_]+$",
       "scope": "parent",
-      "slug": "mysqldb",
+      "prefix": "mysqldb",
       "dashes": true
     },
     {

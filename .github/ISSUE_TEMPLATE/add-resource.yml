@@ -1,0 +1,52 @@
+name: Add Resource
+description: Request to add a new resource
+title: "[ADD]: "
+labels: ["enhancement"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for taking the time to make AzNames even more powerful!
+  - type: input
+    id: ResourceName
+    attributes:
+      label: Resource Name
+      description: What is the name of the resource you would like to add?
+      placeholder: ex. App Service
+    validations:
+      required: true
+  - type: dropdown
+    id: scope
+    attributes:
+      label: Resource Name Scope
+      description: What is the scope for the resource name?
+      options:
+        - Global
+        - Subscription
+        - Resource Group
+    validations:
+      required: true
+  - type: dropdown
+    id: browsers
+    attributes:
+      label: What browsers are you seeing the problem on?
+      multiple: true
+      options:
+        - Firefox
+        - Chrome
+        - Safari
+        - Microsoft Edge
+  - type: textarea
+    id: logs
+    attributes:
+      label: Relevant log output
+      description: Please copy and paste any relevant log output. This will be automatically formatted into code, so no need for backticks.
+      render: shell
+  - type: checkboxes
+    id: terms
+    attributes:
+      label: Code of Conduct
+      description: By submitting this issue, you agree to follow our [Code of Conduct](https://example.com)
+      options:
+        - label: I agree to follow this project's Code of Conduct
+          required: true

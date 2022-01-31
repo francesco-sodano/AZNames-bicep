@@ -1,9 +1,9 @@
 /*
- * Azure Bicep Module:
- * Azure Naming Convention - Azure Resoruce refName Generator
+ * Azure Bicep Module
+ * Azure Naming Convention - Azure Resource refName Generator
  *
- * Author: Francesco Sodano
- * Github: https://github.com/francesco-sodano/bicep-azurenaming
+ * Authors: Francesco Sodano, Dominique Broeglin
+ * Github: https://github.com/francesco-sodano/AZNames-bicep
  * 
  */
 
