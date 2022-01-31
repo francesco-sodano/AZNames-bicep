@@ -20,7 +20,7 @@ body:
     attributes:
       label: Minimum lenght
       description: What is the minimum lenght for the resource name (number only)?
-      placeholder: 2
+      placeholder: "2"
     validations:
       required: true
   - type: input
@@ -28,7 +28,7 @@ body:
     attributes:
       label: Maximum lenght
       description: What is the maximum lenght for the resource name (number only)?
-      placeholder: 10
+      placeholder: "10"
     validations:
       required: true
   - type: dropdown
