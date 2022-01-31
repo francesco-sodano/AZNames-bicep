@@ -36,14 +36,13 @@ The attribute meanings are the following:
 | Attribute | Description | 
 | -------- | ---------- | 
 | **name** | Name of the resource, this will be used as name for the resource call in the module without "_" | 
-| **lenght** | The minimum and the maximum length of the resource name | 
+| **length** | The minimum and the maximum length of the resource name | 
 | **regex** | Name regex rules for the resource|
 | **scope** | Azure scope of the name unicity (could be Global, Subscription, Resource Group) |
 | **prefix** | Defined prefix assigned to the resource |
 | **dashes** | If the name accepts dash (-) in the name |
 
 Most of this information can be taken from [the official Microsoft Documentation](https://docs.microsoft.com/en-us/azure/azure-resource-manager/management/resource-name-rules#microsoftweb)
-
 
 
 
