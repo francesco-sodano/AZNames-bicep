@@ -16,7 +16,7 @@ param suffixes array = [
 @description('Custom ending value for naming - if not specified, part of resourceGroup.Id will be used')
 param uniquifier string = resourceGroup().id
  
-@description('Max length of the uniqueness suffix to be added from 0 to 5 - if not specified, the lenght will be 3')
+@description('Max length of the uniqueness suffix to be added from 0 to 5 - if not specified, the length will be 3')
 @minValue(0)
 @maxValue(5)
 param uniquifierLength int = 3
