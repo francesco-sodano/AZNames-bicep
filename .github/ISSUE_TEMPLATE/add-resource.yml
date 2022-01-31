@@ -46,11 +46,12 @@ body:
     id: regex
     attributes:
       label: Resource Name Rule
-      description: Resource Name Rule schema (in regex)
+      description: Resource Name Rule schema (special characters are removed by default)
       options:
-        - "^(?=.{MIN,MAX}$)[a-z0-9][a-zA-Z0-9-]+[a-z0-9]"
-        - "^(?=.{MIN,MAX}$)[a-z0-9]+$"
-        - Custom
+        - Alphanumerics
+        - Alphanumerics and hyphens
+        - Alphanumerics, hyphens, and underscores
+        - Alphanumerics, periods, hyphens, and underscores
     validations:
       required: true
   - type: checkboxes
@@ -69,3 +70,12 @@ body:
       placeholder: https://docs.microsoft.com/en-us/azure/azure-resource-manager/management/resource-name-rules#microsoftweb
     validations:
       required: true
+  - type: textarea
+    id: additionalinfo
+    attributes:
+      label: Anything else that can help?
+      description: Also tell us anything you would like to comment!
+      placeholder: Tell us what you think!
+      value: "I love this project!"
+    validations:
+      required: false
