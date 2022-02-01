@@ -14,6 +14,8 @@ param suffixes array = [
   'dev'
 ]
 
+// Parameters that are part of the goverance and should be fixed in the module
+//*****************************************************************************
 @description('Custom ending value for naming - if not specified, part of resourceGroup.Id will be used')
 param uniquifier string = resourceGroup().id
  
@@ -21,10 +23,11 @@ param uniquifier string = resourceGroup().id
 @minValue(0)
 @maxValue(5)
 param uniquifierLength int = 3
- 
+
 @description('Dashes will be used when possible')
 param useDashes bool = true
  
+//*****************************************************************************
 
 var separator = useDashes ? '-' : ''
 var useUniquifier = uniquifierLength == 0
@@ -36,8 +39,6 @@ var resourceNameTemplate = '${azureDummyResource}${definedSuffix}'
 var resourceNameTemplateNoDashes = replace(resourceNameTemplate, separator, '')
 var uniqueResourceNameTemplate = '${azureDummyResource}${definedSuffix}${uniquifierEnd}'
 var uniqueResourceNameTemplateNoDashes = replace(uniqueResourceNameTemplate, separator, '')
-
-
 
 output names object = {
   analysisServicesServer: {
