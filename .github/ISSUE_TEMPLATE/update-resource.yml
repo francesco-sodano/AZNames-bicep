@@ -27,8 +27,6 @@ body:
         - Prefix
         - Dashes
         - Rules Schema
-      validations:
-        required: true
   - type: textarea
     id: fixinfo
     attributes:
