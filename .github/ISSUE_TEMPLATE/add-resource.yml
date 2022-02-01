@@ -1,4 +1,4 @@
-name: Add a resource
+name: Add a new Resource
 description: Request to add a new resource to the AzNames module
 title: "[ADD]: "
 labels: ["enhancement"]
@@ -76,6 +76,5 @@ body:
       label: Anything else that can help?
       description: Also tell us anything you would like to comment!
       placeholder: Tell us what you think!
-      value: "I love this project!"
     validations:
       required: false

@@ -1,0 +1,47 @@
+name: Fix or Update a Resource
+description: Request to update/fix a new resource to the AzNames module
+title: "[FIX]: "
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for taking the time to make AzNames even more powerful!
+  - type: input
+    id: resourcename
+    attributes:
+      label: Resource Name
+      description: What is the name of the resource you would like to fix/update?
+      placeholder: ex. App Service
+    validations:
+      required: true
+  - type: dropdown
+    id: attibute-to-fix
+    attributes:
+      label: Attribute to fix/update
+      description: What is the attribute to fix/update?
+      options:
+        - Name
+        - Length
+        - Scope
+        - Prefix
+        - Dashes
+        - Rules Schema
+      validations:
+        required: true
+  - type: textarea
+    id: fixinfo
+    attributes:
+      label: What's wrong there?
+      description: Tell us anything can help us to fix/update the resource (like the old and the new values)!
+      placeholder: the new value is...
+    validations:
+      required: true
+  - type: input
+    id: resourceurl
+    attributes:
+      label: Microsoft docs URL
+      description: Can you share the link of the Microsoft official documentation?
+      placeholder: https://docs.microsoft.com/en-us/azure/azure-resource-manager/management/resource-name-rules#microsoftweb
+    validations:
+      required: false
