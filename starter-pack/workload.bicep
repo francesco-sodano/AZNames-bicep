@@ -52,17 +52,20 @@ module storage 'modules/storage.module.bicep' = {
   }
 }
 
-// EXAMPLE 4 - Create multiple storage accounts instances with a loop using the 'refName' and appending the counter.
+// EXAMPLE 4 - Create multiple storage accounts instances with a loop using the 'unique' and appending the counter.
 resource storageLoop 'Microsoft.Storage/storageAccounts@2021-06-01' = [for i in range(0, storageCount): {
-  name: '${aznames.storageAccount.refname}${i}'
+  name: '${aznames.storageAccount.uniName}${i}'
   location: location
   sku: {
     name: 'Standard_LRS'
   }
   kind: 'StorageV2'
+  properties: {
+    accessTier: 'Hot'
+    supportsHttpsTrafficOnly: true
+  }
   tags: tags
 }]
-
 
 output storageAccountName string = storage.outputs.name
 output appServiceName string = webApplication.name
