@@ -1,6 +1,7 @@
 /*
- * Azure Bicep Module
- * Azure Naming Convention - Azure Resource refName Generator
+ * AzNames Module
+ * This Bicep module helps to automate resource name generation following the recommended 
+ * naming convention and abbreviations for Azure resource types.
  *
  * Authors: Francesco Sodano, Dominique Broeglin
  * Github: https://github.com/francesco-sodano/AZNames-bicep
@@ -971,14 +972,6 @@ output names object = {
     refName: substring(replace(resourceNameTemplate, separator, 'pip'), 0, min(length(replace(resourceNameTemplate, separator, 'pip')), 80))
     uniName: substring(replace(uniqueResourceNameTemplate, separator, 'pip'), 0, min(length(replace(uniqueResourceNameTemplate, separator, 'pip')), 80))
     prefix: 'pip'
-    maxLength: 80
-    scope: 'parent'
-    dashes: true
-  }
-  publicIpPrefix: {
-    refName: substring(replace(resourceNameTemplate, separator, 'ippre'), 0, min(length(replace(resourceNameTemplate, separator, 'ippre')), 80))
-    uniName: substring(replace(uniqueResourceNameTemplate, separator, 'ippre'), 0, min(length(replace(uniqueResourceNameTemplate, separator, 'ippre')), 80))
-    prefix: 'ippre'
     maxLength: 80
     scope: 'parent'
     dashes: true

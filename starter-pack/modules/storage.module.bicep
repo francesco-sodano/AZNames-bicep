@@ -1,3 +1,14 @@
+/*
+ * AzNames Module - Starter Pack
+ * This Bicep module helps to automate resource name generation following the recommended 
+ * naming convention and abbreviations for Azure resource types.
+ *
+ * Authors: Francesco Sodano, Dominique Broeglin
+ * Github: https://github.com/francesco-sodano/AZNames-bicep
+ * 
+ * Starter Pack Kit - Storage Account Module
+ */
+
 param location string
 param name string
 param tags object = {}

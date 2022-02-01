@@ -1,3 +1,13 @@
+/*
+ * AzNames Module - Starter Pack
+ * This Bicep module helps to automate resource name generation following the recommended 
+ * naming convention and abbreviations for Azure resource types.
+ *
+ * Authors: Francesco Sodano, Dominique Broeglin
+ * Github: https://github.com/francesco-sodano/AZNames-bicep
+ * 
+ * Starter Pack Kit - Umbrella deployment file
+ */
 targetScope = 'subscription'
 
 param location string
@@ -12,7 +22,7 @@ resource rg 'Microsoft.Resources/resourceGroups@2021-04-01' = {
   tags: tags
 }
 
-// Azure Names module Deployment - some parameters of this module should be fixed as part of the planned naming convention. 
+// AzNames module Deployment - some parameters of this module should be fixed as part of the planned naming convention. 
 module aznames 'modules/aznames.module.bicep' = {
   scope: resourceGroup(rg.name)
   name: 'azNames'  
