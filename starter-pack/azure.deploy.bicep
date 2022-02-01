@@ -22,7 +22,8 @@ resource rg 'Microsoft.Resources/resourceGroups@2021-04-01' = {
   tags: tags
 }
 
-// AzNames module Deployment - some parameters of this module should be fixed as part of the planned naming convention. 
+// AzNames module Deployment - some parameters of this module should be fixed as part of the planned naming convention.
+// This will generate all the names of the resources at deployment time
 module aznames 'modules/aznames.module.bicep' = {
   scope: resourceGroup(rg.name)
   name: 'azNames'  
@@ -37,6 +38,7 @@ module aznames 'modules/aznames.module.bicep' = {
 }
 
 // Main deployment has all the resources of the Workload (you can also refer here to extra resourcegroup or subscription resources)
+// This will deploy all the resources getting, as input, the output of the AzNames module
 module main 'workload.bicep' = {
   scope: resourceGroup(rg.name)
   name: 'workloadDeployment'
@@ -48,8 +50,10 @@ module main 'workload.bicep' = {
 }
 
 // Outputs of the main deployment
+// This section should be changed with the output of the deployment (or removed if not required)
 output resourceGroupId string = rg.id
 output resourceGroupName string = rg.name
 output appServiceName string = main.outputs.appServiceName
 output appServicePlanName string = main.outputs.appServicePlanName
 output storageAccountName string = main.outputs.storageAccountName
+output storageLoopNames array = main.outputs.storageLoopNames
