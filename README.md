@@ -14,11 +14,10 @@ Inspired by [Terraform module/implementation](https://github.com/Azure/terraform
 
 ## Project Structure (and automation)
 
-The base of the project is the `azure.resources.definition.json` file: this JON file should be considered as the configuration file and contains all the rules for the name generation.
+The base of the project is the `azure.resources.definition.json` file.
+This JON file should be considered as the configuration file and contains all the rules for the name generation. The file is composed by multiple blocks (one for each resource) with the following structure:
 
-This file is composed by multiple blocks (one for each resource) with the following structure:
-
-```go
+```json
 {
     "name": "app_service",
     "length": {
@@ -45,7 +44,6 @@ The attribute meanings are the following:
 Most of this information can be taken from [the official Microsoft Documentation](https://docs.microsoft.com/en-us/azure/azure-resource-manager/management/resource-name-rules#microsoftweb)
 
 
-
 ## The AzNames Module
 
 Due to the fact that the names of the resorurces has to be known at compile-time, the only way to have this is to pre-populate an object with all the possible resource names and provide it as parameter to the bicep file deploying the workload. Due to this, we need to have a subscription-level deployment as entry-point.
@@ -54,7 +52,7 @@ for this reason, we have the `azure.deploy.bicep` (subscription-level deployment
 
 ### Input Parameters
 
-| Parameter name | Description | Type | Default | Required |
+| Parameter | Description | Type | Default | Required |
 | -------- | ---------- | ----------- | ----------- | ----------- |
 | **suffix** | Suffix parts to be included in the naming | array(string) | [appdemo,dev] | no |
 | **uniquifier** | The string be used as uniquifuer | string | resourceGroup().id | no |
@@ -76,7 +74,7 @@ for this reason, we have the `azure.deploy.bicep` (subscription-level deployment
 
 Every resource will have an output with the following format:
 
-```go
+```json
 appService = {
     refName = "app-suffix1-suffixN"
     uniName = "app-suffix1-suffixN-uniquifier"
@@ -87,11 +85,31 @@ appService = {
 }
 ```
 
-## How to use
+## How to use the Starter Pack
 
 A Starter-Pack tool has been created to showcase how to use this module and how to create the required bicep file structure to safely deploy any workload. You will find it in the `starter-pack` folder of this repository.
 
 The starter pack will deploy *TBD - add example of resources deployed and the architecture*
+
+### Deploy using Azure CLI ###
+
+1. Open the Azure CLI directly from the Azure Portal
+2. Clone the repository
+
+    ```
+    git clone https://github.com/francesco-sodano/AZNames-bicep
+    ```
+3. Move to the starter-pack folder.
+
+    ```
+    cd AZNames-bicep/starter-pack
+    ```
+
+4. Deploy the bicep main file
+
+    ```
+    az deployment sub create --location "West Europe" --template-file ./azure.deploy.bicep --parameters @azure.deploy.parameters.json
+    ```
 
 ## Contributing
 
