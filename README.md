@@ -12,23 +12,6 @@ This module is made to be fully customizable and adapt to user defined naming co
 
 Inspired by [Terraform module/implementation](https://github.com/Azure/terraform-azurerm-naming), this project is a reworking of the great job done by [Nikolaos Antoniou](https://github.com/nianton/azure-naming)
 
-## Getting started
-
-### Azure Portal
-
-Want to try the module? Just open an Azure Cloud Shell (bash) from your Azure Portal, clone the repository go in to `./starter-pack` to run the deployment:
-
-    git clone https://github.com/francesco-sodano/AZNames-bicep.git
-    cd ./AZNames-bicep/starter-pack/ 
-    az deployment sub create --location "West Europe" --template-file azure.deploy.bicep  --parameters azure.deploy.parameters.json
-
-This will deploy an  `rg-demobicep-prod` with an App Service and Storage Accounts.
-
-### Clean up
-
-Don't forget to cleanup afterward:
-
-    az group delete --resource-group rg-demobicep-prod
 
 ## Project Structure (and automation)
 
@@ -107,9 +90,16 @@ appService = {
 
 A Starter-Pack tool has been created to showcase how to use this module and how to create the required bicep file structure to safely deploy any workload. You will find it in the `starter-pack` folder of this repository.
 
-The starter pack will deploy *TBD - add example of resources deployed and the architecture*
+The starter pack will create a resource group with the following Azure service instances:
 
-### Deploy using Azure CLI ###
+- 1 Azure Webapp 
+- 1 Azure App Service Plan
+- 1 Azure Storage Account (deployed using a separate bicep module)
+- 3 Azure Storage Accounts (deplyoed using a bicep loop)
+
+
+
+### Deploy using Azure CLI
 
 1. Open the Azure CLI directly from the Azure Portal
 2. Clone the repository
@@ -125,9 +115,16 @@ The starter pack will deploy *TBD - add example of resources deployed and the ar
 
 4. Deploy the bicep main file
 
-    ```
+    ````
     az deployment sub create --location "West Europe" --template-file ./azure.deploy.bicep --parameters @azure.deploy.parameters.json
     ```
+
+### Clean up
+
+Don't forget to cleanup afterward to avoid any unnecessary costs:
+
+    az group delete --resource-group rg-demobicep-prod
+
 
 ## Contributing
 
