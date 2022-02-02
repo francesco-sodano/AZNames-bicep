@@ -6,7 +6,7 @@
         "value": "demobicep"
       },
       "environment": {
-        "value": "prod"
+        "value": "dev"
       },
       "location": {
         "value": "westeurope"
