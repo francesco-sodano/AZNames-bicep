@@ -12,6 +12,24 @@ This module is made to be fully customizable and adapt to user defined naming co
 
 Inspired by [Terraform module/implementation](https://github.com/Azure/terraform-azurerm-naming), this project is a reworking of the great job done by [Nikolaos Antoniou](https://github.com/nianton/azure-naming)
 
+## Getting started
+
+### Azure Portal
+
+Want to try the module? Just open an Azure Cloud Shell (bash) from your Azure Portal, clone the repository go in to `./starter-pack` to run the deployment:
+
+    git clone https://github.com/francesco-sodano/AZNames-bicep.git
+    cd ./AZNames-bicep/starter-pack/ 
+    az deployment sub create --location "West Europe" --template-file azure.deploy.bicep  --parameters azure.deploy.parameters.json
+
+This will deploy an  `rg-demobicep-prod` with an App Service and Storage Accounts.
+
+### Clean up
+
+Don't forget to cleanup afterward:
+
+    az group delete --resource-group rg-demobicep-prod
+
 ## Project Structure (and automation)
 
 The base of the project is the `azure.resources.definition.json` file: this JON file should be considered as the configuration file and contains all the rules for the name generation.
@@ -48,9 +66,9 @@ Most of this information can be taken from [the official Microsoft Documentation
 
 ## The AzNames Module
 
-Due to the fact that the names of the resorurces has to be known at compile-time, the only way to have this is to pre-populate an object with all the possible resource names and provide it as parameter to the bicep file deploying the workload. Due to this, we need to have a subscription-level deployment as entry-point.
+Due to the fact that the names of the resources has to be known at compile-time, the only way to have this is to pre-populate an object with all the possible resource names and provide it as parameter to the bicep file deploying the workload. Due to this, we need to have a subscription-level deployment as entry-point.
 
-for this reason, we have the `azure.deploy.bicep` (subscription-level deployment) that includes the `aznames.module.bicep` and pass the output (the object including all the names) to the `workload.bicep` that contains all the required Azure resoruces for the solution. 
+for this reason, we have the `azure.deploy.bicep` (subscription-level deployment) that includes the `aznames.module.bicep` and pass the output (the object including all the names) to the `workload.bicep` that contains all the required Azure resources for the solution. 
 
 ### Input Parameters
 
