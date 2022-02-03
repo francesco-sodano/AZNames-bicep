@@ -75,7 +75,7 @@ for this reason, we have the `azure.deploy.bicep` (subscription-level deployment
 
 Every resource will have an output with the following format:
 
-```json
+```go
 appService = {
     refName = "app-suffix1-suffixN"
     uniName = "app-suffix1-suffixN-uniquifier"
@@ -107,6 +107,7 @@ The starter pack will create a resource group with the following Azure service i
     ```
     git clone https://github.com/francesco-sodano/AZNames-bicep
     ```
+
 3. Move to the starter-pack folder.
 
     ```
@@ -115,7 +116,7 @@ The starter pack will create a resource group with the following Azure service i
 
 4. Deploy the bicep main file
 
-    ````
+    ```
     az deployment sub create --location "West Europe" --template-file ./azure.deploy.bicep --parameters @azure.deploy.parameters.json
     ```
 
