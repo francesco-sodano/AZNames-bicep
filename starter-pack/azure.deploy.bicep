@@ -13,6 +13,9 @@ targetScope = 'subscription'
 param location string
 param applicationName string
 param environment string
+param storageCount int
+param dbsCount int
+param sqlAdmin string
 param tags object = {}
 
 // Resource group where the workload will be deployed
@@ -45,6 +48,9 @@ module main 'workload.bicep' = {
   params: {
     location: location
     aznames: aznames.outputs.names
+    sqlAdmin: sqlAdmin
+    storageCount: storageCount
+    dbsCount: dbsCount
     tags: tags
   }
 }
@@ -57,3 +63,5 @@ output appServiceName string = main.outputs.appServiceName
 output appServicePlanName string = main.outputs.appServicePlanName
 output storageAccountName string = main.outputs.storageAccountName
 output storageLoopNames array = main.outputs.storageLoopNames
+output sqlDbsLoopNames array = main.outputs.sqlDbsLoopNames
+output sqlAdminPwd string = main.outputs.sqlAdminPwd

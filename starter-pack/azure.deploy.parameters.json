@@ -11,6 +11,15 @@
       "location": {
         "value": "westeurope"
       },
+      "storageCount": {
+        "value": "dev"
+      },
+      "dbsCount": {
+        "value": "dev"
+      },
+      "sqlAdmin": {
+        "value": "sqlDemoAdmin"
+      },
       "tags": {
         "value": {
           "owner": "myself",

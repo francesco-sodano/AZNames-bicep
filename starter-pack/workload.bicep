@@ -13,7 +13,13 @@
 param aznames object
 param location string = resourceGroup().location
 param tags object
-param storageCount int = 3
+param sqlAdmin string
+param storageCount int
+param dbsCount int
+
+
+// Random password generation - don't use this in production environments
+var sqlAdminPassword = 'B${uniqueString(resourceGroup().id)}!'
 
 // this deployment is including some examples to use:
 
@@ -28,7 +34,7 @@ resource appServicePlan 'Microsoft.Web/serverfarms@2020-12-01' = {
   }
 }
 
-// EXAMPLE 2 - Web application name should be globally unique, we prefer the 'nameUnique' property here
+// EXAMPLE 2 - Web application name should be globally unique, we prefer the 'uniName' property here
 resource webApplication 'Microsoft.Web/sites@2018-11-01' = {
   name: aznames.appService.uniName
   location: location
@@ -67,9 +73,36 @@ resource storageLoop 'Microsoft.Storage/storageAccounts@2021-06-01' = [for i in 
   tags: tags
 }]
 
+// EXAMPLE 5 - Create a SQL Server with multiple DBs using unique name for the server and refname with a counter for the DBs.
+resource sql 'Microsoft.Sql/servers@2021-05-01-preview' = {
+  name: aznames.sqlServer.uniName
+  location: location
+  properties: {
+    administratorLogin: sqlAdmin
+    administratorLoginPassword: sqlAdminPassword
+    version: '12.0'
+  }
+
+  resource sqlDbsLoop 'databases@2021-05-01-preview' = [for i in range(0, dbsCount): {
+    name: '${aznames.sqlDatabase.refName}-00${i}'
+    location: location
+    sku: {
+      name: 'Basic'
+    }
+    properties: {}
+    tags: tags
+  }]
+  tags: tags
+}
+
 output storageAccountName string = storage.outputs.name
 output appServiceName string = webApplication.name
 output appServicePlanName string = appServicePlan.name
 output storageLoopNames array = [for i in range(0,storageCount) : {
   name: storageLoop[i].name
+} ]
+output sqlServerName string = sql.name
+output sqlAdminPwd string = sqlAdminPassword
+output sqlDbsLoopNames array = [for i in range(0,dbsCount) : {
+  name: sql::sqlDbsLoop[i].name
 } ]
