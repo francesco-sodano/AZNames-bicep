@@ -95,8 +95,7 @@ The starter pack will create a resource group with the following Azure service i
 - 1 Azure Webapp 
 - 1 Azure App Service Plan
 - 1 Azure Storage Account (deployed using a separate bicep module)
-- 3 Azure Storage Accounts (deplyoed using a bicep loop)
-
+- 3 Azure Storage Accounts (deployed using a bicep loop)
 
 
 ### Deploy using Azure CLI
