@@ -12,10 +12,10 @@
         "value": "westeurope"
       },
       "storageCount": {
-        "value": "dev"
+        "value": 3
       },
       "dbsCount": {
-        "value": "dev"
+        "value": 2
       },
       "sqlAdmin": {
         "value": "sqlDemoAdmin"
