@@ -983,14 +983,6 @@ output names object = {
     scope: 'parent'
     dashes: true
   }
-  publicIpPrefix: {
-    refName: substring(replace(resourceNameTemplate, separator, 'ippre'), 0, min(length(replace(resourceNameTemplate, separator, 'ippre')), 80))
-    uniName: substring(replace(uniqueResourceNameTemplate, separator, 'ippre'), 0, min(length(replace(uniqueResourceNameTemplate, separator, 'ippre')), 80))
-    prefix: 'ippre'
-    maxLength: 80
-    scope: 'parent'
-    dashes: true
-  }
   purviewService: {
     refName: substring(replace(resourceNameTemplate, separator, 'pview'), 0, min(length(replace(resourceNameTemplate, separator, 'pview')), 63))
     uniName: substring(replace(uniqueResourceNameTemplate, separator, 'pview'), 0, min(length(replace(uniqueResourceNameTemplate, separator, 'pview')), 63))
