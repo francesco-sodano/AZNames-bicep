@@ -853,7 +853,7 @@
         "max": 64
       },
       "regex": "^(?=.{3,64}$)[a-zA-Z0-9-]+[a-zA-Z0-9]$",
-      "scope": "resoureceGroup",
+      "scope": "resourceGroup",
       "prefix": "provs",
       "dashes": true
     },
@@ -1284,17 +1284,6 @@
       "regex": "^(?=.{1,80}$)[a-zA-Z0-9][a-zA-Z0-9-._]+[a-zA-Z0-9_]$",
       "scope": "parent",
       "prefix": "pip",
-      "dashes": true
-    },
-    {
-      "name": "public_ip_prefix",
-      "length": {
-        "min": 1,
-        "max": 80
-      },
-      "regex": "^(?=.{1,80}$)[a-zA-Z0-9][a-zA-Z0-9-._]+[a-zA-Z0-9_]$",
-      "scope": "parent",
-      "prefix": "ippre",
       "dashes": true
     },
     {

@@ -1,7 +1,6 @@
 /*
- * AzNames Module
- * This Bicep module helps to automate resource name generation following the recommended 
- * naming convention and abbreviations for Azure resource types.
+ * Azure Bicep Module:
+ * Azure Naming Convention - Azure Resoruce refName Generator
  *
  * Authors: Francesco Sodano, Dominique Broeglin
  * Github: https://github.com/francesco-sodano/AZNames-bicep
@@ -15,7 +14,7 @@ param suffixes array = [
 ]
 
 // Parameters that are part of the goverance and should be fixed in the module
-//*****************************************************************************
+// *****************************************************************************
 @description('Custom ending value for naming - if not specified, part of resourceGroup.Id will be used')
 param uniquifier string = resourceGroup().id
  
@@ -23,11 +22,11 @@ param uniquifier string = resourceGroup().id
 @minValue(0)
 @maxValue(5)
 param uniquifierLength int = 3
-
+ 
 @description('Dashes will be used when possible')
 param useDashes bool = true
- 
-//*****************************************************************************
+
+// *****************************************************************************
 
 var separator = useDashes ? '-' : ''
 var useUniquifier = uniquifierLength == 0
@@ -662,7 +661,7 @@ output names object = {
     uniName: substring(replace(uniqueResourceNameTemplate, azureDummyResource, 'provs'), 0, min(length(replace(uniqueResourceNameTemplate, azureDummyResource, 'provs')), 64))
     prefix: 'provs'
     maxLength: 64
-    scope: 'resoureceGroup'
+    scope: 'resourceGroup'
     dashes: true
   }
   iothubProvisioningServiceCertificate: {
@@ -834,9 +833,9 @@ output names object = {
     dashes: true
   }
   mysqlDatabase: {
-    refName: substring(replace(resourceNameTemplate, azureDummyResource, ''), 0, min(length(replace(resourceNameTemplate, azureDummyResource, '')), 63))
-    uniName: substring(replace(uniqueResourceNameTemplate, azureDummyResource, ''), 0, min(length(replace(uniqueResourceNameTemplate, azureDummyResource, '')), 63))
-    prefix: ''
+    refName: substring(replace(resourceNameTemplate, azureDummyResource, 'mysqldb'), 0, min(length(replace(resourceNameTemplate, azureDummyResource, 'mysqldb')), 63))
+    uniName: substring(replace(uniqueResourceNameTemplate, azureDummyResource, 'mysqldb'), 0, min(length(replace(uniqueResourceNameTemplate, azureDummyResource, 'mysqldb')), 63))
+    prefix: 'mysqldb'
     maxLength: 63
     scope: 'parent'
     dashes: true
