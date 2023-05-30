@@ -260,7 +260,7 @@
       },
       "regex": "^(?=.{1,63}$)(?!.*--)[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]$",
       "scope": "resourceGroup",
-      "prefix": "cg",
+      "prefix": "ci",
       "dashes": true
     },
     {
@@ -271,7 +271,7 @@
       },
       "regex": "^(?=.{1,63}$)[a-zA-Z0-9]+$",
       "scope": "resourceGroup",
-      "prefix": "acr",
+      "prefix": "cr",
       "dashes": false
     },
     {
@@ -1031,6 +1031,17 @@
       "regex": "^(?=.{1,80}$)[a-zA-Z0-9_]+$",
       "scope": "resourceGroup",
       "prefix": "dsk",
+      "dashes": true
+    },
+    {
+      "name": "managed_identity",
+      "length": {
+        "min": 3,
+        "max": 128
+      },
+      "regex": "^(?=.{3,128}$)[a-zA-Z0-9][a-zA-Z0-9-_]+$",
+      "scope": "resourceGroup",
+      "prefix": "id",
       "dashes": true
     },
     {

@@ -225,17 +225,17 @@ output names object = {
     dashes: true
   }
   containerGroup: {
-    refName: substring(replace(resourceNameTemplate, azureDummyResource, 'cg'), 0, min(length(replace(resourceNameTemplate, azureDummyResource, 'cg')), 63))
-    uniName: substring(replace(uniqueResourceNameTemplate, azureDummyResource, 'cg'), 0, min(length(replace(uniqueResourceNameTemplate, azureDummyResource, 'cg')), 63))
-    prefix: 'cg'
+    refName: substring(replace(resourceNameTemplate, azureDummyResource, 'ci'), 0, min(length(replace(resourceNameTemplate, azureDummyResource, 'ci')), 63))
+    uniName: substring(replace(uniqueResourceNameTemplate, azureDummyResource, 'ci'), 0, min(length(replace(uniqueResourceNameTemplate, azureDummyResource, 'ci')), 63))
+    prefix: 'ci'
     maxLength: 63
     scope: 'resourceGroup'
     dashes: true
   }
   containerRegistry: {
-    refName: substring(replace(resourceNameTemplateNoDashes, azureDummyResource, 'acr'), 0, min(length(replace(resourceNameTemplateNoDashes, azureDummyResource, 'acr')), 63))
-    uniName: substring(replace(uniqueResourceNameTemplateNoDashes, azureDummyResource, 'acr'), 0, min(length(replace(uniqueResourceNameTemplateNoDashes, azureDummyResource, 'acr')), 63))
-    prefix: 'acr'
+    refName: substring(replace(resourceNameTemplateNoDashes, azureDummyResource, 'cr'), 0, min(length(replace(resourceNameTemplateNoDashes, azureDummyResource, 'cr')), 63))
+    uniName: substring(replace(uniqueResourceNameTemplateNoDashes, azureDummyResource, 'cr'), 0, min(length(replace(uniqueResourceNameTemplateNoDashes, azureDummyResource, 'cr')), 63))
+    prefix: 'cr'
     maxLength: 63
     scope: 'resourceGroup'
     dashes: false
@@ -789,6 +789,14 @@ output names object = {
     uniName: substring(replace(uniqueResourceNameTemplate, azureDummyResource, 'dsk'), 0, min(length(replace(uniqueResourceNameTemplate, azureDummyResource, 'dsk')), 80))
     prefix: 'dsk'
     maxLength: 80
+    scope: 'resourceGroup'
+    dashes: true
+  }
+  managedIdentity: {
+    refName: substring(replace(resourceNameTemplate, azureDummyResource, 'id'), 0, min(length(replace(resourceNameTemplate, azureDummyResource, 'id')), 128))
+    uniName: substring(replace(uniqueResourceNameTemplate, azureDummyResource, 'id'), 0, min(length(replace(uniqueResourceNameTemplate, azureDummyResource, 'id')), 128))
+    prefix: 'id'
+    maxLength: 128
     scope: 'resourceGroup'
     dashes: true
   }
